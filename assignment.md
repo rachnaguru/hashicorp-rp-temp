@@ -1,22 +1,23 @@
-What is the difference between push, pull, and fetch?
+What is the difference between `git push`, `git pull`, and `git fetch`?
 
-git push - sent changes from a local branch to a remote repo
-git fetch - get changes from a remote repo into your tracking branch
-git pull - will get changes from a remote branch into your tracking branch and merge them into a local branch
+<ul>
+<li>git push - sends changes from a local branch to a remote repository</li>
+<li>git fetch - gets changes from a remote repository to your tracking branch</li>
+<li>git pull -  gets changes from a remote branch to your tracking branch and merges them to a local branch</li>
+</ul>
 
-Often git push and git pull are described as equivalent. This isn't entirely correct, since under the hood git pull 
-does two things. 
+**Git Push**
 
-git push takes our current branch, and checks to see whether or not there is a tracking branch for a remote repository 
-connected to it. If so, our changes are taken from our branch and pushed to the remote branch. This is how code is shared 
-with a remote repository, you can think of it as "make the remote branch resemble my local branch". This will fail if the 
-remote branch has diverged from your local branch: if not all the commits in the remote branch are in your local branch. 
-When this happens, your local branch needs to be synchronized with the remote branch with git pull or git fetch and git merge.
+`git push` takes your current branch and checks for a connection between your tracking branch and the remote repository. If so, it takes changes from your branch and pushes them to the remote repository. `git push` uses this methodology to ensure the remote branch resembles your local branch. However, this will only succeed if the remote branch has not diverged from your local branch. If it has, synchronize your local branch with the remote branch by using the `git pull` command or a combination of the `git fetch` and `git merge` commands.
 
-git fetch again takes our current branch, and checks to see if there is a tracking branch. If so, it looks for changes in the 
-remote branch, and pulls them into the tracking branch. It does not change your local branch. To do that, you'll need to do 
-git merge origin/master (for the "master" branch) to merge those changes into your branch - probably also called "master".
+**Git Fetch**
 
-git pull simply does a git fetch followed immediately by git merge. This is often what we desire to do, but some people 
-prefer to use git fetch followed by git merge to make sure they understand the changes they are merging into their branch 
-before the merge happens.
+`git fetch` takes your current branch and checks for a tracking branch. If so, it looks for changes in the remote branch and pulls them to the tracking branch. Note that the `git fetch` command pulls the changes to the tracking branch, not the local branch. If you want to fetch them to the local branch, issue the command `git merge origin/master` (for the "master" branch). The `git merge` command integrates changes from another branch and merges them to your local branch.
+
+**Git Pull**
+
+`git pull` brings the content from a remote repository and immediately updates the local repository to match that content. It performs a `git fetch` followed immediately by `git merge`. 
+
+**Note**
+
+Use `git fetch` and `git merge` instead of `git pull` if you want to view the changes you are merging into your branch before the merge happens.
